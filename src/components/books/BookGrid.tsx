@@ -1,30 +1,29 @@
+'use client';
+
 import BookCard from './BookCard';
+
+import EmptyState from '@/components/ui/EmptyState';
 
 import { Book } from '@/types/book';
 
-interface BookGridProps {
+interface Props {
   books: Book[];
 }
 
 export default function BookGrid({
   books,
-}: BookGridProps) {
+}: Props) {
   if (books.length === 0) {
     return (
-      <div className="rounded-2xl bg-white p-12 text-center shadow-sm">
-        <h2 className="text-xl font-semibold text-slate-700">
-          No books found
-        </h2>
-
-        <p className="mt-2 text-slate-500">
-          Add your first book to get started.
-        </p>
-      </div>
+      <EmptyState
+        title="No books found"
+        description="Start building your personal library by adding your first book."
+      />
     );
   }
 
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
       {books.map((book) => (
         <BookCard
           key={book._id}
