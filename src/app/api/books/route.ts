@@ -10,9 +10,9 @@ import { requireUser } from '@/lib/require-user';
 
 import Book from '@/models/Book';
 
-/* ===========================
-   CREATE BOOK
-=========================== */
+
+  //  CREATE BOOK
+
 
 export async function POST(request: NextRequest) {
     return apiHandler(async () => {
@@ -63,9 +63,9 @@ export async function POST(request: NextRequest) {
     });
 }
 
-/* ===========================
-   GET BOOKS
-=========================== */
+
+  //  GET all BOOKS
+
 
 export async function GET(request: NextRequest) {
   return apiHandler(async () => {
@@ -87,10 +87,7 @@ export async function GET(request: NextRequest) {
       user: userId,
     };
 
-    /* --------------------------
-       Search
-    --------------------------- */
-
+// search by title or author
     if (search) {
       query.$or = [
         {
@@ -108,25 +105,19 @@ export async function GET(request: NextRequest) {
       ];
     }
 
-    /* --------------------------
-       Status Filter
-    --------------------------- */
+  // filter by reading status
 
     if (status) {
       query.status = status;
     }
 
-    /* --------------------------
-       Tag Filter
-    --------------------------- */
+  //  filter by tag
 
     if (tag) {
       query.tags = tag;
     }
 
-    /* --------------------------
-       Sorting
-    --------------------------- */
+  //  set the sorting order
 
     let sortQuery: Record<string, 1 | -1>;
 
@@ -156,24 +147,18 @@ export async function GET(request: NextRequest) {
         break;
     }
 
-    /* --------------------------
-       Total Books
-    --------------------------- */
+  //  get the total number of matching books
 
     const totalBooks = await Book.countDocuments(query);
 
-    /* --------------------------
-       Fetch Books
-    --------------------------- */
+  //  get book for the current page
 
     const books = await Book.find(query)
       .sort(sortQuery)
       .skip(skip)
       .limit(limit);
 
-    /* --------------------------
-       Pagination
-    --------------------------- */
+  
 
     const totalPages = Math.ceil(totalBooks / limit);
 

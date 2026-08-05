@@ -88,7 +88,7 @@ export default function SignupForm() {
                 error={errors.email?.message}
             />
 
-            {/* Password */}
+            {/* password */}
 
             <div>
 
@@ -119,7 +119,7 @@ export default function SignupForm() {
                 </div>
             </div>
 
-            {/* Confirm Password */}
+        {/* confirm password */}
 
             <div>
 

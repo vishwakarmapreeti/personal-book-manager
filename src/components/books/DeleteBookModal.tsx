@@ -73,7 +73,7 @@ export default function DeleteBookModal() {
                 onClick={(e) => e.stopPropagation()}
                 className="w-full max-w-md rounded-2xl bg-white shadow-2xl"
             >
-                {/* Header */}
+               
 
                 <div className="flex flex-col items-center border-b border-slate-200 px-6 py-8">
                     <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
@@ -100,7 +100,6 @@ export default function DeleteBookModal() {
                     </p>
                 </div>
 
-                {/* Footer */}
 
                 <div className="flex justify-end gap-3 px-6 py-5">
                     <Button

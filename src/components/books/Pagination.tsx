@@ -25,7 +25,7 @@ export default function Pagination({
   return (
     <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        {/* Left */}
+   
         <div className="text-sm text-slate-500">
           Showing{' '}
           <span className="font-semibold text-slate-900">
@@ -38,7 +38,7 @@ export default function Pagination({
           books
         </div>
 
-        {/* Center */}
+        
         <div className="flex items-center justify-center gap-2">
           <Button
             variant="secondary"
@@ -74,7 +74,7 @@ export default function Pagination({
           </Button>
         </div>
 
-        {/* Right */}
+        
         <div className="text-sm text-slate-500">
           Page{' '}
           <span className="font-semibold text-slate-900">

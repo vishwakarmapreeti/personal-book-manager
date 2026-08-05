@@ -75,10 +75,10 @@ export default function BookModal({
                 );
             }
 
-            // Close modal first (also clears editingBook)
+        //   close the modal
             onClose();
 
-            // Refresh data after modal is closed
+        //    get the lates data
             await Promise.all([
                 fetchBooks(),
                 fetchStatistics(),
@@ -105,7 +105,7 @@ export default function BookModal({
                 }
                 className="w-full max-w-xl rounded-2xl bg-white shadow-2xl"
             >
-                {/* Header */}
+              
 
                 <div className="border-b border-slate-200 px-6 py-5">
                     <h2 className="text-2xl font-bold">
@@ -121,7 +121,7 @@ export default function BookModal({
                     </p>
                 </div>
 
-                {/* Body */}
+              
 
                 <div className="p-6">
                     <BookForm

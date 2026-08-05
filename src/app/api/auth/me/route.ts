@@ -9,7 +9,7 @@ import User from '@/models/User';
 
 export async function GET() {
   return apiHandler(async () => {
-    // Get Logged-in User ID
+  
     const userId = await getCurrentUserId();
 
     if (!userId) {
@@ -19,7 +19,7 @@ export async function GET() {
       );
     }
 
-    // Find User
+
     const user = await User.findById(userId);
 
     if (!user) {

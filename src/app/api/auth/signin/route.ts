@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
   return apiHandler(async () => {
     const body = await request.json();
 
-    // Validate Request
+    // check the request data
     const validation = signinSchema.safeParse(body);
 
     if (!validation.success) {
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
 
     const { email, password } = validation.data;
 
-    // Find User (include password)
+    // get the user from the db
     const user = await User.findOne({
       email: email.toLowerCase(),
     }).select('+password');
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Compare Password
+    // check if password is correct
     const isPasswordCorrect = await bcrypt.compare(
       password,
       user.password
@@ -53,17 +53,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate JWT
+    // create token for the login user
     const token = generateToken(user._id.toString());
 
-    // Store JWT in HttpOnly Cookie
+    // save token in cookie
     const cookieStore = await cookies();
 
     cookieStore.set('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 7, // 7 Days
+      maxAge: 60 * 60 * 24 * 7, //7 day
       path: '/',
     });
 

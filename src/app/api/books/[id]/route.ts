@@ -11,9 +11,9 @@ import { requireUser } from '@/lib/require-user';
 
 import Book from '@/models/Book';
 
-/* ===========================
-   UPDATE BOOK
-=========================== */
+
+//    UPDATE BOOK
+
 
 export async function PUT(
     request: NextRequest,
@@ -71,9 +71,9 @@ export async function PUT(
     });
 }
 
-/* ===========================
-   DELETE BOOK
-=========================== */
+
+//    DELETE BOOK
+
 
 export async function DELETE(
     request: NextRequest,
@@ -106,6 +106,8 @@ export async function DELETE(
     });
 }
 
+
+// get book by id
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

@@ -48,20 +48,17 @@ const BookSchema = new Schema<IBook>(
   }
 );
 
-/**
- * Indexes
- */
 
-// Fast lookup of all books for a user
+// indexex for common query
 BookSchema.index({ user: 1 });
 
-// Fast filtering by user + status
+
 BookSchema.index({ user: 1, status: 1 });
 
-// Fast sorting by newest books
+
 BookSchema.index({ user: 1, createdAt: -1 });
 
-// Full-text search
+
 BookSchema.index({
   title: 'text',
   author: 'text',

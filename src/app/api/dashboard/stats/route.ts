@@ -8,19 +8,16 @@ import Book from '@/models/Book';
 
 export async function GET() {
   return apiHandler(async () => {
-    // Get logged-in user id
+    // Get theh curret user
     const userId = await requireUser();   
 
-    // Convert string to ObjectId for aggregation
+    // Convert the user id for the query
     const userObjectId = new mongoose.Types.ObjectId(userId);
 
-    // Debug: Verify books exist
-    const books = await Book.find({
-      user: userId,
-    });
+  
 
 
-    // Aggregate statistics
+    // get book count by status
     const stats = await Book.aggregate([
       {
         $match: {
@@ -43,7 +40,7 @@ export async function GET() {
       reading: 0,
       completed: 0,
     };
-
+// add count to the dashboard data
     stats.forEach((item) => {
       dashboard.totalBooks += item.count;
 

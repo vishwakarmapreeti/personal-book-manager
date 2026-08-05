@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
   return apiHandler(async () => {
     const body = await request.json();
 
-    // Validate Request
+    // check the form data
     const validation = signupSchema.safeParse(body);
 
     if (!validation.success) {
@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
 
     const { fullName, email, password } = validation.data;
 
-    // Check Existing User
+    // Check if the email is alreday exists
     const existingUser = await User.findOne({
       email: email.toLowerCase(),
     });
@@ -40,20 +40,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Hash Password
+    // Encrypt the password before saving it
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create User
+    // save the new user
     const user = await User.create({
       fullName,
       email: email.toLowerCase(),
       password: hashedPassword,
     });
 
-    // Generate JWT
+    // create login token
     const token = generateToken(user._id.toString());
 
-    // Store Cookie
+    // save the token in cookie
     const cookieStore = await cookies();
 
     cookieStore.set('token', token, {
