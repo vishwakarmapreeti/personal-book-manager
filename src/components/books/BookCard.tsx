@@ -41,7 +41,7 @@ export default function BookCard({
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
-   
+     
       <div className="flex items-start justify-between">
         <div>
           <h2 className="text-xl font-bold text-slate-900">
@@ -60,7 +60,7 @@ export default function BookCard({
         </span>
       </div>
 
-    
+   
       <div className="mt-5 flex flex-wrap gap-2">
         {book.tags.map((tag) => (
           <span
@@ -72,7 +72,8 @@ export default function BookCard({
         ))}
       </div>
 
-      <div className="mt-6 flex justify-end gap-3">
+    
+      <div className="mt-1 flex justify-end gap-3">
         <Button
           variant="secondary"
           className="h-10 px-4"
