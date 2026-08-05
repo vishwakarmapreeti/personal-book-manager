@@ -10,6 +10,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import toast from 'react-hot-toast';
 
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 
@@ -24,6 +26,14 @@ export default function SignupForm() {
     const router = useRouter();
 
     const [loading, setLoading] = useState(false);
+
+    const [showPassword, setShowPassword] =
+        useState(false);
+
+    const [
+        showConfirmPassword,
+        setShowConfirmPassword,
+    ] = useState(false);
 
     const {
         register,
@@ -78,23 +88,74 @@ export default function SignupForm() {
                 error={errors.email?.message}
             />
 
-            <Input
-                label="Password"
-                type="password"
-                placeholder="********"
-                {...register('password')}
-                error={errors.password?.message}
-            />
+            {/* Password */}
 
-            <Input
-                label="Confirm Password"
-                type="password"
-                placeholder="********"
-                {...register('confirmPassword')}
-                error={
-                    errors.confirmPassword?.message
-                }
-            />
+            <div>
+
+
+                <div className="relative">
+                    <Input
+                        label="Password"
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="********"
+                        {...register('password')}
+                        error={errors.password?.message}
+                        suffix={
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setShowPassword(!showPassword)
+                                }
+                                className="text-slate-500 hover:text-slate-700"
+                            >
+                                {showPassword ? (
+                                    <FiEyeOff size={20} />
+                                ) : (
+                                    <FiEye size={20} />
+                                )}
+                            </button>
+                        }
+                    />
+                </div>
+            </div>
+
+            {/* Confirm Password */}
+
+            <div>
+
+                <div className="relative">
+                    <Input
+                        label="Confirm Password"
+                        type={
+                            showConfirmPassword
+                                ? 'text'
+                                : 'password'
+                        }
+                        placeholder="********"
+                        {...register('confirmPassword')}
+                        error={
+                            errors.confirmPassword?.message
+                        }
+                        suffix={
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setShowConfirmPassword(
+                                        !showConfirmPassword
+                                    )
+                                }
+                                className="text-slate-500 hover:text-slate-700"
+                            >
+                                {showConfirmPassword ? (
+                                    <FiEyeOff size={20} />
+                                ) : (
+                                    <FiEye size={20} />
+                                )}
+                            </button>
+                        }
+                    />
+                </div>
+            </div>
 
             <Button
                 type="submit"

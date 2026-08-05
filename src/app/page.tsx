@@ -1,21 +1,5 @@
-import SignupForm from '@/components/auth/SignupForm';
+import { redirect } from 'next/navigation';
 
-export default function SignupPage() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-100 px-4">
-      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-slate-900">
-            Create Account
-          </h1>
-
-          <p className="mt-2 text-slate-500">
-            Join your personal book manager.
-          </p>
-        </div>
-
-        <SignupForm />
-      </div>
-    </div>
-  );
+export default function HomePage() {
+  redirect('/signin');
 }

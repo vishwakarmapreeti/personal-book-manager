@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -8,6 +9,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import toast from 'react-hot-toast';
+
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
@@ -24,6 +27,9 @@ export default function LoginForm() {
 
   const [loading, setLoading] = useState(false);
 
+  const [showPassword, setShowPassword] =
+    useState(false);
+
   const {
     register,
     handleSubmit,
@@ -32,7 +38,9 @@ export default function LoginForm() {
     resolver: zodResolver(signinSchema),
   });
 
-  async function onSubmit(data: SignInFormData) {
+  async function onSubmit(
+    data: SignInFormData
+  ) {
     try {
       setLoading(true);
 
@@ -43,7 +51,7 @@ export default function LoginForm() {
       router.push('/dashboard');
     } catch (error: any) {
       toast.error(
-        error.response?.data?.message ||
+        error.response?.data?.message ??
           'Something went wrong'
       );
     } finally {
@@ -77,10 +85,31 @@ export default function LoginForm() {
 
         <Input
           label="Password"
-          type="password"
+          type={
+            showPassword
+              ? 'text'
+              : 'password'
+          }
           placeholder="Enter your password"
           error={errors.password?.message}
           {...register('password')}
+          suffix={
+            <button
+              type="button"
+              onClick={() =>
+                setShowPassword(
+                  !showPassword
+                )
+              }
+              className="text-slate-500 transition hover:text-slate-700"
+            >
+              {showPassword ? (
+                <FiEyeOff size={20} />
+              ) : (
+                <FiEye size={20} />
+              )}
+            </button>
+          }
         />
 
         <Button
